@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Results summary component</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  <!-- Feel free to remove these styles or customize in your own stylesheet 👍 -->
+  <link rel="stylesheet" href="./styles.css">
+  
+</head>
+<body>
+  <div class="container">
+    <div class="main-box">
+    <div class="box">
+
+  <h1>Your Result</h1>
+  
+  <div class="score">
+  
+<p id="result-score"><span> 76 </span></p> <!-- Updated the score here -->
+<p class="outOff">of 100</p>
+  
+</div>
+
+<img src="./assets/images/" alt="">
+
+  <h2>Great</h2>
+  <p id="p">You scored higher than 65% of the people who have taken these tests.</p>
+</div>
+<div class="box2">
+<div class="innerbox">
+  <h2>Summary</h2>
+  <div class="corner-border">
+    <div class="corner one-top-left"></div>
+    <div class="corner one-top-right"></div>
+    <div class="corner one-bottom-left"></div>
+    <div class="corner one-bottom-right"></div>
+    
+    <div class="corner two-top-left"></div>
+    <div class="corner two-top-right"></div>
+    <div class="corner two-bottom-left"></div>
+    <div class="corner two-bottom-right"></div>
+    
+    <div class="corner three-top-left"></div>
+    <div class="corner three-top-right"></div>
+    <div class="corner three-bottom-left"></div>
+    <div class="corner three-bottom-right"></div>
+    
+    <div class="corner four-top-left"></div>
+    <div class="corner four-top-right"></div>
+    <div class="corner four-bottom-left"></div>
+    <div class="corner four-bottom-right"></div>
+    <div id="category-scores"></div>
+  </div>
+  <button class="continue">Continue</button>
+</div>
+</div>
+</div>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+
+</div>
+
+
+  <script>
+    fetch('/data.json')
+      .then(response => response.json())
+      .then(data => {
+      
+
+        const categoryScores = document.getElementById('category-scores');
+      data.forEach(category => {
+          const categoryElement = document.createElement('div');
+          categoryElement.classList.add('category-container', category.category.toLowerCase());
+          categoryElement.innerHTML = `
+    <img class="category-icon" src="${category.icon}" alt="${category.category} icon">
+    <div class="category-title">${category.category}</div>
+    <p class="category-score"><span>${category.score}</span> / 100</p>
+  `;
+          categoryScores.appendChild(categoryElement);
+        });
+
+
+      })
+      .catch(error => {
+        console.log('Error fetching JSON:', error);
+      });
+  </script>
+</body>
+</html>
